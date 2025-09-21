@@ -1,4 +1,3 @@
-// server.js
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -15,7 +14,12 @@ app.use(express.json()); // parse JSON from frontend
 // Routes
 app.use('/contacts', contactRoutes);
 
-// Connect to MongoDB and start server
+// ✅ Add this root route for Render
+app.get("/", (req, res) => {
+  res.send("Contact Book Backend is working!");
+});
+
+// MongoDB connection and start server
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log(' Connected to MongoDB');
